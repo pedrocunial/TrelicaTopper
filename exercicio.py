@@ -37,7 +37,15 @@ METER = [
     [float("21e5")]
 ]
 
+BC_NODES = [
+    [1, 1],
+    [1, 2],
+    [2, 1],
+    [2, 2]
+]
+
 def calc_degree():
+    """ Calculates degrees of freedom for each element. """
     d = []
     for i in range(len(INCI)):
         x = [INCI[i][0] * 2 - 1, INCI[i][0] * 2,
@@ -127,9 +135,57 @@ def calc_real_deal():
             for j in range(len(k[i])):
                 real_deal[i][j] += k[i][j]
 
-    return real_deal
+    return np.matrix(real_deal)
 
 real_deal = calc_real_deal()
-print(real_deal)
 
-P_g = [0, 0, 0, 0, 0, 0, 0, -1000]
+
+P_g = [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    -1000
+]
+
+deleted_members = []
+
+def cut(matrix):
+    global P_g
+    global deleted_members
+    P_g = np.matrix(P_g)
+    _bc_nodes = np.matrix(BC_NODES)
+    _bc_nodes = (_bc_nodes[np.argsort(_bc_nodes.A[:, 0])])[::-1]
+    for line in _bc_nodes:
+        deletable = 2 * line[:, 0] + (line[:, 1] - 2) - 1
+        matrix = np.delete(matrix, deletable, 0)
+        matrix = np.delete(matrix, deletable, 1)
+        P_g = np.delete(P_g, deletable, 1)
+        deleted_members.append(deletable)
+    P_g = np.transpose(P_g)
+    return matrix
+
+matrix = cut(real_deal)
+
+def calc_u():
+    t_matrix = np.linalg.inv(matrix)
+    u = np.dot(t_matrix, P_g)
+    u2 = np.zeros(len(real_deal))
+    i = 0
+    j = 0
+    for i in range(len(real_deal)):
+        if i not in deleted_members:
+            u2[i] = u[j]
+            j += 1
+    return u2
+def specific_deformation(inci, matrix_u):
+    constant = 1 / inci[2]
+    matrix = np.matrix([-inci[3], -inci[4], inci[3], inci[4]])
+    matrix_result = np.dot(matrix, matrix_u)
+    result = matrix_result * constant
+    return result
+print(calc_u())
+print(specific_deformation(INCI[0], calc_u()))
