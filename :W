@@ -182,10 +182,14 @@ def calc_u():
             j += 1
     return u2
 
+def specific_deformation(inci, matrix_u):
+    constant = 1 / inci[2]
+    _matrix = np.matrix([-inci[3], -inci[4], inci[3], inci[4]])
+    return np.dot(_matrix, matrix_u) * constant
+
 U = calc_u()
 
-def calc_strain(_id):
-    """Deformation"""
+def real_specific_defo(_id):
     L = INCI[_id][2]
     cos = INCI[_id][3]
     sin = INCI[_id][4]
@@ -204,16 +208,9 @@ def calc_strain(_id):
     ])
     return (1 / L) * np.dot(cs_arr, _u)
 
-def calc_stress(_id):
-    """Tensão"""
-    return METER[_id][0] * calc_strain(_id)
-
-
 print("Displacement:")
 print(U)
 
 print("Specific Deformation")
-print(calc_strain(2))
-
-print("Stress")
-print(calc_stress(2))
+# print(specific_deformation(INCI[0], calc_u()))
+print(real_specific_defo( 0 ))
