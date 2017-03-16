@@ -3,6 +3,17 @@ from math import sqrt
 
 import numpy as np
 
+
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+
 CORDS = [
     [0, 0],
     [0, 21],
@@ -185,10 +196,9 @@ def calc_u():
 U = calc_u()
 
 def calc_strain(_id):
-    """Deformation"""
+    """Deformation."""
     L = INCI[_id][2]
-    cos = INCI[_id][3]
-    sin = INCI[_id][4]
+    cos, sin = INCI[_id][3], INCI[_id][4]
     ele_1, ele_2 = INCI[_id][0] - 1, INCI[_id][1] - 1
     cs_arr = np.array([
         -cos,
@@ -205,15 +215,15 @@ def calc_strain(_id):
     return (1 / L) * np.dot(cs_arr, _u)
 
 def calc_stress(_id):
-    """Tensão"""
+    """Tensão."""
     return METER[_id][0] * calc_strain(_id)
 
 
-print("Displacement:")
-print(U)
 
-print("Specific Deformation")
-print(calc_strain(2))
 
-print("Stress")
-print(calc_stress(2))
+for i in range(6):
+    print(str(bcolors.BOLD) + bcolors.OKBLUE + "=====================================")
+    print(bcolors.HEADER + "Bar {}".format(i) + bcolors.ENDC)
+    print(bcolors.WARNING + "{}Displacement: {}{}".format(bcolors.BOLD, bcolors.ENDC, + U[i]))
+    print(bcolors.WARNING + "{}Strain: {}{}".format(bcolors.BOLD, bcolors.ENDC, calc_strain(i)))
+    print(bcolors.WARNING + "{}Stress: {}{}".format(bcolors.BOLD, bcolors.ENDC, calc_stress(i)))
