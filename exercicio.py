@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 """Exercise 07/02."""
 from math import sqrt
 
@@ -162,6 +164,8 @@ P_g = [
     -1000
 ]
 
+# P_gR = P_g
+
 deleted_members = []
 
 def cut(matrix):
@@ -219,6 +223,46 @@ def calc_stress(_id):
     return METER[_id][0] * calc_strain(_id)
 
 
+deleted_members_reaction = []
+Ur = U
+
+def calc_reaction(matrix):
+    # global P_gR
+    global deleted_members_reaction
+    global Ur
+    # P_gR = np.matrix(P_gR)
+    _bc_nodes = np.matrix(BC_NODES)
+    _bc_nodes = (_bc_nodes[np.argsort(_bc_nodes.A[:, 0])])[::-1]
+    
+    for line in _bc_nodes:
+        deletable = 2 * line[:, 0] + (line[:, 1] - 2) - 1
+        matrix = np.delete(matrix, deletable, 1)
+        Ur = np.delete(Ur,deletable,0)
+        deleted_members_reaction.append(deletable)
+
+    tamanho= len(matrix)
+    for i in range(len(matrix)-1,0,-1):
+        if i not in deleted_members_reaction:
+            matrix = np.delete(matrix, i, 0)
+
+    reac = np.dot(matrix, Ur)
+
+
+    ur2 = np.zeros(tamanho)
+    i=0
+    j=0
+
+    for i in range(tamanho):
+
+        if i in deleted_members_reaction:
+            ur2[i] = reac[::,j]
+            j += 1
+
+    
+    return ur2 #+ P_gR
+            
+
+reacoes =  calc_reaction(real_deal)
 
 
 for i in range(6):
@@ -227,3 +271,12 @@ for i in range(6):
     print(bcolors.WARNING + "{}Displacement: {}{}".format(bcolors.BOLD, bcolors.ENDC, + U[i]))
     print(bcolors.WARNING + "{}Strain: {}{}".format(bcolors.BOLD, bcolors.ENDC, calc_strain(i)))
     print(bcolors.WARNING + "{}Stress: {}{}".format(bcolors.BOLD, bcolors.ENDC, calc_stress(i)))
+
+print(str(bcolors.BOLD) + bcolors.OKBLUE + "=====================================")
+print(bcolors.HEADER + "Reactions" + bcolors.ENDC)
+
+# print(reacoes)
+
+for i in range (len(reacoes)):
+    if reacoes[i] != 0:
+        print("{}R{}: {}{}".format(bcolors.BOLD, i, bcolors.ENDC, reacoes[i]))
