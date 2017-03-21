@@ -185,8 +185,9 @@ def cut(matrix):
 matrix = cut(real_deal)
 
 def calc_u():
-    t_matrix = np.linalg.inv(matrix)  # invert
-    u = np.dot(t_matrix, P_g)
+    # t_matrix = np.linalg.inv(matrix)  # invert
+    _m = np.asarray(matrix)
+    u, _, _ = NumericMethods.gauss_seidel(100, 0.005, _m, P_g)
     u2 = np.zeros(len(real_deal))
     i = 0
     j = 0
@@ -197,9 +198,9 @@ def calc_u():
     return u2
 
 U = calc_u()
-_m = np.asarray(matrix)
-U_gauss, _, _ = NumericMethods.gauss_seidel(100, 0.005, _m, P_g)
-U_jacobi, _, _ = NumericMethods.jacobi(100, 0.005, _m, P_g)
+
+# U_gauss, _, _ = NumericMethods.gauss_seidel(100, 0.005, _m, P_g)
+# U_jacobi, _, _ = NumericMethods.jacobi(100, 0.005, _m, P_g)
 
 def calc_strain(_id):
     """Deformation."""
@@ -283,7 +284,7 @@ print(bcolors.HEADER + "Reactions" + bcolors.ENDC)
 
 for i in range(len(reacoes)):
     if reacoes[i] != 0:
-        print("{}R{}: {}{}".format(bcolors.BOLD, i, bcolors.ENDC, reacoes[i]))
+        print("{}{}R{}: {}{}".format(bcolors.WARNING,bcolors.BOLD, i, bcolors.ENDC, reacoes[i]))
 
 n_i = 1;
 for i in range(len(U)):
@@ -296,20 +297,3 @@ for i in range(len(U)):
                                               U[i],
                                               "y" if i % 2 else "x"))
 
-for i in range(len(U_gauss)):
-    print(str(bcolors.BOLD) + bcolors.OKBLUE +
-          "=====================================")
-    print(bcolors.HEADER + "Node {}".format(i // 2) + bcolors.ENDC)
-    print(bcolors.WARNING +
-          "{}Displacement Gauss: {}{} in {}".format(bcolors.BOLD,
-                                                    bcolors.ENDC,
-                                                    U_gauss[i],
-                                                    "y" if i % 2 else "x"))
-    print(bcolors.WARNING +
-          "{}Displacement Jacobi: {}{} in {}".format(bcolors.BOLD,
-                                                     bcolors.ENDC,
-                                                     U_jacobi[i],
-                                                     "y" if i % 2 else "x"))
-print(U)
-print(U_gauss)
-print(U_jacobi)
