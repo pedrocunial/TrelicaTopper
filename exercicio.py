@@ -3,8 +3,10 @@
 """Exercise 07/02."""
 from math import sqrt
 from inverter import NumericMethods
+from parser import Parser
 
 import numpy as np
+import sys
 
 
 class bcolors:
@@ -17,46 +19,28 @@ class bcolors:
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
 
-CORDS = [
-    [0, 0],
-    [0, 21],
-    [21, 0],
-    [21, 21]
-]
 
-INCI = [
-    [1, 2],
-    [1, 3],
-    [3, 4],
-    [2, 4],
-    [2, 3],
-    [1, 4]
-]
+input_file = sys.argv[1]
+parser = Parser(input_file)
 
-PROP = [
-    [1],
-    [1],
-    [1],
-    [1],
-    [sqrt(2)],
-    [sqrt(2)]
-]
+# Coordinates of the Nodes
+CORDS = parser.coords
 
-METER = [
-    [float("21e5")],
-    [float("21e5")],
-    [float("21e5")],
-    [float("21e5")],
-    [float("21e5")],
-    [float("21e5")]
-]
+# Incidences (AKA bars)
+INCI = parser.inci
 
-BC_NODES = [
-    [1, 1],
-    [1, 2],
-    [2, 1],
-    [2, 2]
-]
+# Geometric Proportions
+PROP = parser.prop
+
+# Materials
+METER = parser.materials
+
+# Boundary Condition Nodes (AKA Nodes without a given degree of freedom)
+BC_NODES = parser.bcnodes
+
+# Loads
+P_g = parser.loads
+
 
 def calc_degree():
     """ Calculates degrees of freedom for each element. """
@@ -103,6 +87,7 @@ def calc_trelica():
         i.append(cos)
         i.append(sin)
 
+
 def calc_Ke():
     K_e = []
     for i in range(len(INCI)):
@@ -123,6 +108,7 @@ def calc_Ke():
 calc_trelica()
 K_e = calc_Ke()
 
+
 def calc_kg():
     m = []
     for j in range(len(K_e)):
@@ -139,6 +125,7 @@ def calc_kg():
 
 K_g = calc_kg()
 
+
 def calc_real_deal():
     real_deal = []
     for i in range(len(CORDS) * 2):
@@ -152,20 +139,8 @@ def calc_real_deal():
     return np.matrix(real_deal)
 
 real_deal = calc_real_deal()
-
-
-P_g = [
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    -1000
-]
-
 deleted_members = []
+
 
 def cut(matrix):
     global P_g
@@ -184,9 +159,10 @@ def cut(matrix):
 
 matrix = cut(real_deal)
 
+
 def calc_u():
-    t_matrix = np.linalg.inv(matrix)  # invert
-    u = np.dot(t_matrix, P_g)
+    _m = np.asarray(matrix)
+    u, _, _ = NumericMethods.gauss_seidel(100, 0.005, _m, P_g)
     u2 = np.zeros(len(real_deal))
     i = 0
     j = 0
@@ -197,9 +173,7 @@ def calc_u():
     return u2
 
 U = calc_u()
-_m = np.asarray(matrix)
-U_gauss, _, _ = NumericMethods.gauss_seidel(100, 0.005, _m, P_g)
-U_jacobi, _, _ = NumericMethods.jacobi(100, 0.005, _m, P_g)
+
 
 def calc_strain(_id):
     """Deformation."""
@@ -220,13 +194,14 @@ def calc_strain(_id):
     ])
     return (1 / L) * np.dot(cs_arr, _u)
 
+
 def calc_stress(_id):
     """Tensão."""
     return METER[_id][0] * calc_strain(_id)
 
-
 deleted_members_reaction = []
 Ur = U
+
 
 def calc_reaction(matrix):
     # global P_gR
@@ -297,21 +272,3 @@ for i in range(len(U)):
                                               bcolors.ENDC,
                                               U[i],
                                               "y" if i % 2 else "x"))
-
-# for i in range(len(U_gauss)):
-#     print(str(bcolors.BOLD) + bcolors.OKBLUE +
-#           "=====================================")
-#     print(bcolors.HEADER + "Node {}".format(i // 2) + bcolors.ENDC)
-#     print(bcolors.WARNING +
-#           "{}Displacement Gauss: {}{} in {}".format(bcolors.BOLD,
-#                                                     bcolors.ENDC,
-#                                                     U_gauss[i],
-#                                                     "y" if i % 2 else "x"))
-#     print(bcolors.WARNING +
-#           "{}Displacement Jacobi: {}{} in {}".format(bcolors.BOLD,
-#                                                      bcolors.ENDC,
-#                                                      U_jacobi[i],
-#                                                      "y" if i % 2 else "x"))
-# print(U)
-# print(U_gauss)
-# print(U_jacobi)
