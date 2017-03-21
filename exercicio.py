@@ -287,29 +287,31 @@ for i in range(len(reacoes)):
 
 n_i = 1;
 for i in range(len(U)):
-    print(str(bcolors.BOLD) + bcolors.OKBLUE +
-          "=====================================")
-    print(bcolors.HEADER + "Node {}".format(i // 2) + bcolors.ENDC)
+    if i % 2 == 0:
+        print(str(bcolors.BOLD) + bcolors.OKBLUE +
+              "=====================================")
+        print(bcolors.HEADER + "Node {}".format(i // 2) + bcolors.ENDC)
+
     print(bcolors.WARNING +
           "{}Displacement: {}{} in {}".format(bcolors.BOLD,
                                               bcolors.ENDC,
                                               U[i],
                                               "y" if i % 2 else "x"))
 
-for i in range(len(U_gauss)):
-    print(str(bcolors.BOLD) + bcolors.OKBLUE +
-          "=====================================")
-    print(bcolors.HEADER + "Node {}".format(i // 2) + bcolors.ENDC)
-    print(bcolors.WARNING +
-          "{}Displacement Gauss: {}{} in {}".format(bcolors.BOLD,
-                                                    bcolors.ENDC,
-                                                    U_gauss[i],
-                                                    "y" if i % 2 else "x"))
-    print(bcolors.WARNING +
-          "{}Displacement Jacobi: {}{} in {}".format(bcolors.BOLD,
-                                                     bcolors.ENDC,
-                                                     U_jacobi[i],
-                                                     "y" if i % 2 else "x"))
-print(U)
-print(U_gauss)
-print(U_jacobi)
+# for i in range(len(U_gauss)):
+#     print(str(bcolors.BOLD) + bcolors.OKBLUE +
+#           "=====================================")
+#     print(bcolors.HEADER + "Node {}".format(i // 2) + bcolors.ENDC)
+#     print(bcolors.WARNING +
+#           "{}Displacement Gauss: {}{} in {}".format(bcolors.BOLD,
+#                                                     bcolors.ENDC,
+#                                                     U_gauss[i],
+#                                                     "y" if i % 2 else "x"))
+#     print(bcolors.WARNING +
+#           "{}Displacement Jacobi: {}{} in {}".format(bcolors.BOLD,
+#                                                      bcolors.ENDC,
+#                                                      U_jacobi[i],
+#                                                      "y" if i % 2 else "x"))
+# print(U)
+# print(U_gauss)
+# print(U_jacobi)
