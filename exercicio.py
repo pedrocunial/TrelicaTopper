@@ -224,7 +224,6 @@ def calc_reaction(matrix):
 
     reac = np.dot(matrix, Ur)
 
-
     ur2 = np.zeros(tamanho)
     i=0
     j=0
@@ -258,7 +257,7 @@ print(bcolors.HEADER + "Reactions" + bcolors.ENDC)
 
 for i in range(len(reacoes)):
     if reacoes[i] != 0:
-        print("{}R{}: {}{}".format(bcolors.BOLD, i, bcolors.ENDC, reacoes[i]))
+        print("{}{}R{}: {}{}".format(bcolors.WARNING,bcolors.BOLD, i, bcolors.ENDC, reacoes[i]))
 
 n_i = 1;
 for i in range(len(U)):
