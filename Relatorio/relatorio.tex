@@ -1,0 +1,85 @@
+%%% Preamble
+\documentclass[paper=a4, fontsize=11pt]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage{fourier}
+\usepackage[brazilian]{babel}							% Português
+\usepackage[protrusion=true,expansion=true]{microtype}	
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage[pdftex]{graphicx}	
+\usepackage{url}
+
+
+%%% Custom sectioning
+\usepackage{sectsty}
+\allsectionsfont{\centering \normalfont\scshape}
+
+
+%%% Custom headers/footers (fancyhdr package)
+\usepackage{fancyhdr}
+\pagestyle{fancyplain}
+\fancyhead{}											% No page header
+\fancyfoot[L]{}											% Empty 
+\fancyfoot[C]{}											% Empty
+\fancyfoot[R]{\thepage}									% Pagenumbering
+\renewcommand{\headrulewidth}{0pt}						% Remove header underlines
+\renewcommand{\footrulewidth}{0pt}						% Remove footer underlines
+\setlength{\headheight}{13.6pt}
+
+%%% Maketitle metadata
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} 		% Horizontal rule
+
+\title{
+		%\vspace{-1in} 	
+		\usefont{OT1}{bch}{b}{n}
+		\normalfont \normalsize \textsc{Insper: Instituto de Ensino e Pesquisa} \\ [25pt] %Instituição
+		\horrule{0.5pt} \\[0.4cm]														  
+		\huge Implementação e análise de treliças planas \\			%Título do relatório
+		\horrule{2pt} \\[0.5cm]
+}
+\author{										%Autores
+		\normalfont 								\normalsize
+        Marcelo Andrade\\[-3pt]		\normalsize
+		Pedro Cunial\\[-3pt]		\normalsize
+        Gabriela Almeida\\[-3pt]		\normalsize
+}
+\date{\today}
+
+
+%%% Início document
+\begin{document}
+	
+%%% Capa do documento
+\maketitle
+
+\newpage
+
+%% Sumário
+\tableofcontents
+
+\newpage
+
+%%% Início Relatorio
+
+%%% Objetivos
+\section{Objetivos}
+
+%%% Introdução
+\section{Introdução}
+
+%%% Metodologia
+\section{Metodologia}
+
+%%% Resultados e Discussão
+\section{Resultados e Discussão}
+
+%%% Conclusões
+\section{Conclusões}
+
+%%% Agradecimentos
+\section{Agradecimentos}
+
+\bibliography{referencias}{}
+\bibliographystyle{plain}
+
+%%% Fim do Documento
+\end{document}

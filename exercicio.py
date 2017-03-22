@@ -43,13 +43,14 @@ P_g = parser.loads
 
 
 def calc_degree():
-    """ Calculates degrees of freedom for each element. """
+    """Calculate degrees of freedom for each element."""
     d = []
     for i in range(len(INCI)):
         x = [INCI[i][0] * 2 - 1, INCI[i][0] * 2,
              INCI[i][1] * 2 - 1, INCI[i][1] * 2]
         d.append(x)
     return d
+
 
 degrees = calc_degree()
 
@@ -89,27 +90,31 @@ def calc_trelica():
 
 
 def calc_Ke():
+    """Calculate Ke."""
     K_e = []
     for i in range(len(INCI)):
         cos = INCI[i][3]
         sen = INCI[i][4]
         k_tmp = [
-            [cos**2, cos*sen, -cos**2, -cos * sen],
-            [cos*sen, sen**2, -cos * sen, -sen**2],
+            [cos**2, cos * sen, -cos**2, -cos * sen],
+            [cos * sen, sen**2, -cos * sen, -sen**2],
             [-cos**2, -cos * sen, cos**2, cos * sen],
             [-cos * sen, -sen**2, cos * sen, sen**2],
         ]
         for j in range(len(k_tmp)):
-            k_tmp[j] = [(METER[i][0] * PROP[i][0] / INCI[i][2]) * k_tmp[j][w] for w in range(len(k_tmp[j]))]
+            k_tmp[j] = [(METER[i][0] * PROP[i][0] / INCI[i][2]) *
+                        k_tmp[j][w] for w in range(len(k_tmp[j]))]
 
         K_e.append(k_tmp)
     return K_e
+
 
 calc_trelica()
 K_e = calc_Ke()
 
 
 def calc_kg():
+    """Calculate Kg."""
     m = []
     for j in range(len(K_e)):
         arr = []
@@ -123,10 +128,12 @@ def calc_kg():
                 m[i][degrees[i][j] - 1][degrees[i][d] - 1] = K_e[i][j][d]
     return m
 
+
 K_g = calc_kg()
 
 
 def calc_real_deal():
+    """Calculate real_deal."""
     real_deal = []
     for i in range(len(CORDS) * 2):
         real_deal.append(np.zeros(len(CORDS) * 2))
@@ -138,11 +145,13 @@ def calc_real_deal():
 
     return np.matrix(real_deal)
 
+
 real_deal = calc_real_deal()
 deleted_members = []
 
 
 def cut(matrix):
+    """Cut matrix."""
     global P_g
     global deleted_members
     P_g = np.matrix(P_g)
@@ -157,10 +166,12 @@ def cut(matrix):
     P_g = np.transpose(P_g)
     return matrix
 
+
 matrix = cut(real_deal)
 
 
 def calc_u():
+    """Calculate U."""
     _m = np.asarray(matrix)
     u, _, _ = NumericMethods.gauss_seidel(100, 0.005, _m, P_g)
     u2 = np.zeros(len(real_deal))
@@ -171,6 +182,7 @@ def calc_u():
             u2[i] = u[j]
             j += 1
     return u2
+
 
 U = calc_u()
 
@@ -196,7 +208,7 @@ def calc_strain(_id):
 
 
 def calc_stress(_id):
-    """Tensão."""
+    """Tensao."""
     return METER[_id][0] * calc_strain(_id)
 
 deleted_members_reaction = []
@@ -204,40 +216,39 @@ Ur = U
 
 
 def calc_reaction(matrix):
-    # global P_gR
+    """Calculate reaction."""
     global deleted_members_reaction
     global Ur
-    # P_gR = np.matrix(P_gR)
     _bc_nodes = np.matrix(BC_NODES)
     _bc_nodes = (_bc_nodes[np.argsort(_bc_nodes.A[:, 0])])[::-1]
 
     for line in _bc_nodes:
         deletable = 2 * line[:, 0] + (line[:, 1] - 2) - 1
         matrix = np.delete(matrix, deletable, 1)
-        Ur = np.delete(Ur,deletable,0)
+        Ur = np.delete(Ur, deletable, 0)
         deleted_members_reaction.append(deletable)
 
-    tamanho= len(matrix)
-    for i in range(len(matrix)-1,0,-1):
+    tamanho = len(matrix)
+    for i in range(len(matrix) - 1, 0, -1):
         if i not in deleted_members_reaction:
             matrix = np.delete(matrix, i, 0)
 
     reac = np.dot(matrix, Ur)
 
     ur2 = np.zeros(tamanho)
-    i=0
-    j=0
+    i = 0
+    j = 0
 
     for i in range(tamanho):
 
         if i in deleted_members_reaction:
-            ur2[i] = reac[::,j]
+            ur2[i] = reac[::, j]
             j += 1
-
 
     return ur2
 
-reacoes =  calc_reaction(real_deal)
+
+reacoes = calc_reaction(real_deal)
 
 
 for i in range(len(METER)):
@@ -257,9 +268,11 @@ print(bcolors.HEADER + "Reactions" + bcolors.ENDC)
 
 for i in range(len(reacoes)):
     if reacoes[i] != 0:
-        print("{}{}R{}: {}{}".format(bcolors.WARNING,bcolors.BOLD, i, bcolors.ENDC, reacoes[i]))
+        print("{}{}R{}: {}{}".format(bcolors.WARNING,
+                                     bcolors.BOLD, i,
+                                     bcolors.ENDC, reacoes[i]))
 
-n_i = 1;
+n_i = 1
 for i in range(len(U)):
     if i % 2 == 0:
         print(str(bcolors.BOLD) + bcolors.OKBLUE +
