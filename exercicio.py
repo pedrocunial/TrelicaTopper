@@ -8,6 +8,8 @@ import numpy as np
 
 
 class bcolors:
+    """Colors to print."""
+
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
     OKGREEN = '\033[92m'
@@ -71,6 +73,7 @@ def calc_degree():
 
 
 degrees = calc_degree()
+print(degrees)
 
 
 def calc_comp(x1, x2, y1, y2):

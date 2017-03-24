@@ -7,7 +7,9 @@
 \usepackage{amsmath,amsfonts,amsthm} % Math packages
 \usepackage[pdftex]{graphicx}	
 \usepackage{url}
-
+\usepackage{indentfirst}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\Vector}{\lparen}{\rparen}
 
 %%% Custom sectioning
 \usepackage{sectsty}
@@ -62,12 +64,63 @@
 
 %%% Objetivos
 \section{Objetivos}
+Os objetivos do projeto são os seguintes:
+
+\begin{itemize}
+	\item Implementar um programa para análise de tração/compressão em
+	treliças planas. O código deverá ser escrito de modo que os dados de entrada
+	possam ser facilmente alterados a partir de um arquivo de texto. O programa deverá gerar um arquivo de saída, como
+	descrito no Anexo II. 
+	
+	\item Aplicar técnicas numéricas e implementar um programa para
+	solução de sistemas de equações. 
+	
+	\item Analisar o arquivo de saída com o pós-processamento dos dados
+	disponibilizado. 
+\end{itemize}
 
 %%% Introdução
 \section{Introdução}
 
 %%% Metodologia
 \section{Metodologia}
+
+A partir do arquivo de entrada do programa, primeiramente calcula-se os graus de liberdade de cada um dos elementos a partir da matriz de incidências do arquivo de entrada. Sendo \(N\) os graus de liberdade de um elemento \(x\), e \(I\) a matriz de incidências:
+
+
+\[N_x = 
+\begin{bmatrix}
+I_{x1} - 1 ,& I_{x1} ,& I_{x2} - 1 ,& I_{x2}  \\
+\end{bmatrix}
+\]
+
+Em seguida, calcula-se as especificações de cada elemento da treliça a partir da matriz de coordenadas \(C\), sendo elas o comprimento do elemento, cosseno e seno do ângulo. Considerando\(L\) o comprimento do elemento \(x\), \(cos\) o cosseno do ângulo \(\theta\) de \(x\) e \(sin\) o seno do ângulo \(\theta\) de \(x\):
+
+\[L_x = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}\]
+
+\[sin_x = \frac{y_2 - y_1}{L_x}\]
+
+\[cos_x = \frac{x_2 - x_1}{L_x} \]
+
+Com as especificações de cada elemento obtidas, calcula-se as matriz de rigidez do elemento de barra no sistema global, representada por \(K_e\). Sendo \(E\) o módulo de elasticidade do material da barra, \(A\) a área da seção transversal da barra, \(l\) o comprimento da mesma e \(c\) e \(s\) respectivamente o cosseno e seno do ângulo \(\theta\) do elemento:
+
+\[K_e = \frac{E \cdot A}{l}
+\begin{bmatrix}
+c^2 & cs & -c^2 & -cs\\
+cs & s^2 & -cs & -s^2 \\
+-c^2 & -cs & c^2 & cs \\
+-cs & -s^2 & cs & s^2
+\end{bmatrix}
+\]
+
+Já com a matriz de rigidez no sistema global de cada elemento, calculou-se a matriz de rigidez global da treliça, representada por \(K_g\). Para esse cálculo, primeiro tem-se que determinar as matrizes de superposição para cada elemento, a soma dessas matrizes resulta na rigidez global da treliça. 
+
+As matrizes de superposição são obtidas através substituição dos índices da matriz \(K_e\) pelos seus respectivos graus de liberdade.
+
+A partir da matriz \(K_g\), utilizando o vetor de forças globais e os graus de liberdade dos nós, aplica-se as condições de contorno na matriz \(K_g\).
+
+Com a matriz \(K_g\) simplificada para a análise, 
+
 
 %%% Resultados e Discussão
 \section{Resultados e Discussão}
@@ -76,7 +129,7 @@
 \section{Conclusões}
 
 %%% Agradecimentos
-\section{Agradecimentos}
+\section{Agradecimentos} 
 
 \bibliography{referencias}{}
 \bibliographystyle{plain}
