@@ -182,7 +182,7 @@ matrix = cut(real_deal)
 def calc_u():
     """Calculate U."""
     _m = np.asarray(matrix)
-    u, _, _ = NumericMethods.gauss_seidel(100, 0.005, _m, P_g)
+    u, _, _ = NumericMethods.gauss_seidel(1000, 0, _m, P_g)
     u2 = np.zeros(len(real_deal))
     i = 0
     j = 0
