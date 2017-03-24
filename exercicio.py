@@ -20,7 +20,16 @@ class bcolors:
     UNDERLINE = '\033[4m'
 
 
-input_file = sys.argv[1]
+try:
+    input_file = sys.argv[1]
+except IndexError:
+    input_file = 'arquivoentrada.fem'
+
+try:
+    out_file = sys.argv[2]
+except IndexError:
+    out_file = 'arquivoSaida.out'
+
 parser = Parser(input_file)
 
 # Coordinates of the Nodes
@@ -284,3 +293,35 @@ for i in range(len(U)):
                                               bcolors.ENDC,
                                               U[i],
                                               "y" if i % 2 else "x"))
+
+FX = 'FX'
+FY = 'FY'
+
+with open(out_file, 'w') as fout:
+    fout.write('*DISPLACEMENTS\n')
+    for i in range(len(U) // 2):
+        fout.write('    {} {} {}\n'.format(
+            i + 1,
+            U[i * 2],
+            U[i * 2 + 1]
+        ))
+    fout.write('\n*ELEMENT_STRAINS\n')
+    for i in range(len(METER)):
+        fout.write('    {} {}\n'.format(
+            i + 1,
+            calc_strain(i)
+        ))
+    fout.write('\n*ELEMENT_STRESSES\n')
+    for i in range(len(METER)):
+        fout.write('    {} {}\n'.format(
+            i + 1,
+            calc_stress(i)
+        ))
+    fout.write('\n*REACTION_FORCES\n')
+    for i, reac in zip(range(len(reacoes)), reacoes):
+        if reac != 0:
+            fout.write('    {} {} = {}\n'.format(
+                i // 2 + 1,
+                FY if i % 2 else FX,
+                reac
+            ))
