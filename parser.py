@@ -79,7 +79,7 @@ class Parser:
 
         for i in range(n):
             line = self.fin.readline().strip().split()
-            self.loads[(int(line[0]) - 1) * 2 + int(line[1]) - 1] = int(line[2])
+            self.loads[(int(line[0]) - 1) * 2 + int(line[1]) - 1] = float(line[2])
 
 
 
