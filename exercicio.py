@@ -3,8 +3,10 @@
 """Exercise 07/02."""
 from math import sqrt
 from inverter import NumericMethods
+from parser import Parser
 
 import numpy as np
+import sys
 
 
 class bcolors:
@@ -18,46 +20,26 @@ class bcolors:
     UNDERLINE = '\033[4m'
 
 
-CORDS = [
-    [0, 0],
-    [0, 21],
-    [21, 0],
-    [21, 21]
-]
+input_file = sys.argv[1]
+parser = Parser(input_file)
 
-INCI = [
-    [1, 2],
-    [1, 3],
-    [3, 4],
-    [2, 4],
-    [2, 3],
-    [1, 4]
-]
+# Coordinates of the Nodes
+CORDS = parser.coords
 
-PROP = [
-    [1],
-    [1],
-    [1],
-    [1],
-    [sqrt(2)],
-    [sqrt(2)]
-]
+# Incidences (AKA bars)
+INCI = parser.inci
 
-METER = [
-    [float("21e5")],
-    [float("21e5")],
-    [float("21e5")],
-    [float("21e5")],
-    [float("21e5")],
-    [float("21e5")]
-]
+# Geometric Proportions
+PROP = parser.prop
 
-BC_NODES = [
-    [1, 1],
-    [1, 2],
-    [2, 1],
-    [2, 2]
-]
+# Materials
+METER = parser.materials
+
+# Boundary Condition Nodes (AKA Nodes without a given degree of freedom)
+BC_NODES = parser.bcnodes
+
+# Loads
+P_g = parser.loads
 
 
 def calc_degree():
@@ -165,19 +147,6 @@ def calc_real_deal():
 
 
 real_deal = calc_real_deal()
-
-
-P_g = [
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    -1000
-]
-
 deleted_members = []
 
 
@@ -242,7 +211,6 @@ def calc_stress(_id):
     """Tensao."""
     return METER[_id][0] * calc_strain(_id)
 
-
 deleted_members_reaction = []
 Ur = U
 
@@ -306,9 +274,11 @@ for i in range(len(reacoes)):
 
 n_i = 1
 for i in range(len(U)):
-    print(str(bcolors.BOLD) + bcolors.OKBLUE +
-          "=====================================")
-    print(bcolors.HEADER + "Node {}".format(i // 2) + bcolors.ENDC)
+    if i % 2 == 0:
+        print(str(bcolors.BOLD) + bcolors.OKBLUE +
+              "=====================================")
+        print(bcolors.HEADER + "Node {}".format(i // 2) + bcolors.ENDC)
+
     print(bcolors.WARNING +
           "{}Displacement: {}{} in {}".format(bcolors.BOLD,
                                               bcolors.ENDC,
