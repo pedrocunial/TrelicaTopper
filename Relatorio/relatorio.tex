@@ -5,10 +5,12 @@
 \usepackage[brazilian]{babel}							% Português
 \usepackage[protrusion=true,expansion=true]{microtype}	
 \usepackage{amsmath,amsfonts,amsthm} % Math packages
-\usepackage[pdftex]{graphicx}	
+\usepackage[pdftex]{graphicx}
+\usepackage{graphicx}	
 \usepackage{url}
 \usepackage{indentfirst}
 \usepackage{mathtools}
+\usepackage{listings}
 \DeclarePairedDelimiter{\Vector}{\lparen}{\rparen}
 
 %%% Custom sectioning
@@ -69,8 +71,7 @@ Os objetivos do projeto são os seguintes:
 \begin{itemize}
 	\item Implementar um programa para análise de tração/compressão em
 	treliças planas. O código deverá ser escrito de modo que os dados de entrada
-	possam ser facilmente alterados a partir de um arquivo de texto. O programa deverá gerar um arquivo de saída, como
-	descrito no Anexo II. 
+	possam ser facilmente alterados a partir de um arquivo de texto. O programa deverá gerar um arquivo de saída.
 	
 	\item Aplicar técnicas numéricas e implementar um programa para
 	solução de sistemas de equações. 
@@ -114,22 +115,75 @@ cs & s^2 & -cs & -s^2 \\
 \]
 
 Já com a matriz de rigidez no sistema global de cada elemento, calculou-se a matriz de rigidez global da treliça, representada por \(K_g\). Para esse cálculo, primeiro tem-se que determinar as matrizes de superposição para cada elemento, a soma dessas matrizes resulta na rigidez global da treliça. 
-
+	
 As matrizes de superposição são obtidas através substituição dos índices da matriz \(K_e\) pelos seus respectivos graus de liberdade.
 
 A partir da matriz \(K_g\), utilizando o vetor de forças globais e os graus de liberdade dos nós, aplica-se as condições de contorno na matriz \(K_g\).
 
-Com a matriz \(K_g\) simplificada para a análise, 
+Com a matriz \(K_g\) simplificada para a análise e a usando a matriz de forças \(P_g\), foi-se calculado o vetor de deslocamento dos nós da treliça, representada por \(U\).
 
+\[[K_g]\cdot\{U\} = \{P_g\}\]
+
+Pode-se interpretar a equação matricial acima como um sistema de equações. Utilizou-se o método numérico de Gauss-Seidel, como é explicado em \cite{gauss_seidel}. Usamos como entrada do método um número máximo de 1000 iterações e um erro esperado igual a 0 com precisão de ponto flutuante, resultando nos valores do vetor de deslocamento.
+
+Com o vetor de deslocamento calculado e utilizando a matriz \(K_g\) anterior as condições de contorno descritas, aplicamos condições de contorno no vetor \(U\) e na matriz \(K_g\) e determinou-se as reações de apoio em cada um dos nós da treliça, formando uma matriz \(R\) de reações.
+
+\[\{R\} = [K_g] \{U\}\]
+
+Por fim, calculou-se a tensão e deformação de cada um dos elementos, a tensão representado por \(\sigma\) e a deformação representada por \(\epsilon\).
+
+\[\sigma = \frac{E}{l}  
+\begin{bmatrix}
+-c & -s & c & s\\
+\end{bmatrix}
+\begin{bmatrix}
+u_1 \\
+v_1 \\
+u_2 \\
+v_2 \\
+\end{bmatrix}
+\]
+
+
+\[\epsilon = \frac{1}{l}  
+\begin{bmatrix}
+-c & -s & c & s\\
+\end{bmatrix}
+\begin{bmatrix}
+u_1 \\
+v_1 \\
+u_2 \\
+v_2 \\
+\end{bmatrix}
+\]
+
+Com todos os valores das reações de apoio, tensões e deformações dos elementos, e deslocamentos dos nós, exportou-se todos os dados em um arquivo de saída.
 
 %%% Resultados e Discussão
 \section{Resultados e Discussão}
+
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics{trelica_entrada.png}
+	\caption{Figura representativa da entrada do programa}
+	\label{Rotulo}
+\end{figure}
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics{secao1.png}
+	\caption{Seção usada na entrada}
+	\label{Rotulo}
+\end{figure}
+
 
 %%% Conclusões
 \section{Conclusões}
 
 %%% Agradecimentos
 \section{Agradecimentos} 
+
 
 \bibliography{referencias}{}
 \bibliographystyle{plain}

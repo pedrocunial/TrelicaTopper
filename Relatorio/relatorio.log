@@ -1,4 +1,4 @@
-This is LuaTeX, Version beta-0.80.0 (TeX Live 2015/Debian) (rev 5238)  (format=lualatex 2016.11.6)  24 MAR 2017 09:33
+This is LuaTeX, Version beta-0.80.0 (TeX Live 2015/Debian) (rev 5238)  (format=lualatex 2016.11.6)  28 MAR 2017 17:51
  restricted \write18 enabled.
 **relatorio.tex
 (./relatorio.tex
@@ -562,6 +562,31 @@ LaTeX Info: Thecontrolsequence`\]'isalreadyrobust on input line 129.
 \l_MT_above_shortintertext_sep=\dimen123
 \l_MT_below_shortintertext_sep=\dimen124
 )
+(/usr/share/texlive/texmf-dist/tex/latex/listings/listings.sty
+\lst@mode=\count109
+\lst@gtempboxa=\box29
+\lst@token=\toks27
+\lst@length=\count110
+\lst@currlwidth=\dimen125
+\lst@column=\count111
+\lst@pos=\count112
+\lst@lostspace=\dimen126
+\lst@width=\dimen127
+\lst@newlines=\count113
+\lst@lineno=\count114
+\lst@maxwidth=\dimen128
+
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
+\c@lstnumber=\count115
+\lst@skipnumbers=\count116
+\lst@framebox=\box30
+)
+(/usr/share/texlive/texmf-dist/tex/latex/listings/listings.cfg
+File: listings.cfg 2015/06/04 1.6 listings configuration
+))
+Package: listings 2015/06/04 1.6 (Carsten Heinz)
+
 (/usr/share/texlive/texmf-dist/tex/latex/sectsty/sectsty.sty
 Package: sectsty 2002/02/25 v2.0.2 Commands to change all sectional heading styl
 es
@@ -572,7 +597,7 @@ Class scrartcl Warning: Usage of package `fancyhdr' together
 (scrartcl)              I'd suggest to use 
 (scrartcl)              package `scrlayer-scrpage'.
 (scrartcl)              Nevertheless, using requested
-(scrartcl)              package `fancyhdr' on input line 21.
+(scrartcl)              package `fancyhdr' on input line 23.
 
 (/usr/share/texlive/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
 \fancy@headwidth=\skip59
@@ -585,54 +610,58 @@ Class scrartcl Warning: Usage of package `fancyhdr' together
 \f@ncyO@olf=\skip66
 \f@ncyO@orf=\skip67
 )
-(./relatorio.aux)
+(./relatorio.aux
+
+LaTeX Warning: Label `Rotulo' multiply defined.
+
+)
 \openout1 = relatorio.aux
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for FML/futm/m/it on input line 51.
-LaTeX Font Info:    Try loading font information for FML+futm on input line 51.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for FML/futm/m/it on input line 53.
+LaTeX Font Info:    Try loading font information for FML+futm on input line 53.
  (/usr/share/texlive/texmf-dist/tex/latex/fourier/fmlfutm.fd
 File: fmlfutm.fd 2004/10/30 Fontinst v1.926 font definitions for FML/futm.
 )
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for FMS/futm/m/n on input line 51.
-LaTeX Font Info:    Try loading font information for FMS+futm on input line 51.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for FMS/futm/m/n on input line 53.
+LaTeX Font Info:    Try loading font information for FMS+futm on input line 53.
 
 (/usr/share/texlive/texmf-dist/tex/latex/fourier/fmsfutm.fd
 File: fmsfutm.fd 2004/10/30 Fontinst v1.926 font definitions for FMS/futm.
 )
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for FMX/futm/m/n on input line 51.
-LaTeX Font Info:    Try loading font information for FMX+futm on input line 51.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for FMX/futm/m/n on input line 53.
+LaTeX Font Info:    Try loading font information for FMX+futm on input line 53.
 
 (/usr/share/texlive/texmf-dist/tex/latex/fourier/fmxfutm.fd
 File: fmxfutm.fd futm-extension
 )
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 51.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 51.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 53.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 53.
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Try loading font information for T1+futs on input line 51.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Try loading font information for T1+futs on input line 53.
 
 (/usr/share/texlive/texmf-dist/tex/latex/fourier/t1futs.fd
 File: t1futs.fd 2004/03/02 Fontinst v1.926 font definitions for T1/futs.
 )
-LaTeX Info: Redefining \microtypecontext on input line 51.
+LaTeX Info: Redefining \microtypecontext on input line 53.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
@@ -649,17 +678,17 @@ Package microtype Info: Loading generic settings for font family
 
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count109
-\scratchdimen=\dimen125
-\scratchbox=\box29
-\nofMPsegments=\count110
-\nofMParguments=\count111
-\everyMPshowfont=\toks27
-\MPscratchCnt=\count112
-\MPscratchDim=\dimen126
-\MPnumerator=\count113
-\makeMPintoPDFobject=\count114
-\everyMPtoPDFconversion=\toks28
+\scratchcounter=\count117
+\scratchdimen=\dimen129
+\scratchbox=\box31
+\nofMPsegments=\count118
+\nofMParguments=\count119
+\everyMPshowfont=\toks28
+\MPscratchCnt=\count120
+\MPscratchDim=\dimen130
+\MPnumerator=\count121
+\makeMPintoPDFobject=\count122
+\everyMPtoPDFconversion=\toks29
 ) (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO)
 
@@ -680,7 +709,7 @@ Package pdftexcmds Info: \pdfdraftmode found.
 Package: luatex-loader 2010/03/09 v0.4 Lua module loader (HO)
 
 (/usr/share/texlive/texmf-dist/scripts/oberdiek/oberdiek.luatex.lua))
-\pdftexcmds@toks=\toks29
+\pdftexcmds@toks=\toks30
 )
 (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
@@ -708,7 +737,8 @@ Package grfext Info: Graphics extension search list:
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 
 ))
-LaTeX Font Info:    Try loading font information for T1+cmss on input line 55.
+\c@lstlisting=\count123
+LaTeX Font Info:    Try loading font information for T1+cmss on input line 57.
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmss.fd
 File: t1cmss.fd 2014/09/29 v2.5h Standard LaTeX font definitions
@@ -717,7 +747,7 @@ Package microtype Info: Loading generic settings for font family
 (microtype)             `cmss' (encoding: T1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-LaTeX Font Info:    Try loading font information for OT1+bch on input line 55.
+LaTeX Font Info:    Try loading font information for OT1+bch on input line 57.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1bch.fd
 File: ot1bch.fd 2004/10/18 font definitions for OT1/bch.
@@ -725,25 +755,25 @@ File: ot1bch.fd 2004/10/18 font definitions for OT1/bch.
 (/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-bch.cfg
 File: mt-bch.cfg 2007/03/03 v1.5 microtype config. file: Bitstream Charter (RS)
 )
-LaTeX Font Info:    Try loading font information for FML+futmi on input line 55.
+LaTeX Font Info:    Try loading font information for FML+futmi on input line 57.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/fourier/fmlfutmi.fd
 File: fmlfutmi.fd 2004/10/30 Fontinst v1.926 font definitions for FML/futmi.
 )
 LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 13.24796pt on input line 55.
+(Font)              scaled to size 13.24796pt on input line 57.
 LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 9.19998pt on input line 55.
+(Font)              scaled to size 9.19998pt on input line 57.
 LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 7.35999pt on input line 55.
+(Font)              scaled to size 7.35999pt on input line 57.
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 13.24796pt on input line 55.
+(Font)              scaled to size 13.24796pt on input line 57.
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 9.19998pt on input line 55.
+(Font)              scaled to size 9.19998pt on input line 57.
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 7.35999pt on input line 55.
-LaTeX Font Info:    Try loading font information for U+msa on input line 55.
+(Font)              scaled to size 7.35999pt on input line 57.
+LaTeX Font Info:    Try loading font information for U+msa on input line 57.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
@@ -751,7 +781,7 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 (/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 55.
+LaTeX Font Info:    Try loading font information for U+msb on input line 57.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -768,16 +798,16 @@ Class scrartcl Warning: incompatible usage of \@ssect detected.
 (scrartcl)              from within a non compatible caller, that does not
 (scrartcl)              \scr@s@ct@@nn@m@ locally.
 (scrartcl)              This could result in several error messages on input lin
-e 59.
+e 61.
 
-Package tocbasic Info: character protrusion at toc deactivated on input line 59.
+Package tocbasic Info: character protrusion at toc deactivated on input line 61.
 
 (./relatorio.toc)
 \tf@toc=\write3
 
 \openout3 = relatorio.toc
  [2]
-LaTeX Font Info:    Try loading font information for TS1+futs on input line 70.
+LaTeX Font Info:    Try loading font information for TS1+futs on input line 72.
 
 (/usr/share/texlive/texmf-dist/tex/latex/fourier/ts1futs.fd
 File: ts1futs.fd 2004/03/26 Fontinst v1.926 font definitions for TS1/futs.
@@ -787,19 +817,35 @@ Package microtype Info: Loading generic settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 10.07397pt on input line 88.
+(Font)              scaled to size 10.07397pt on input line 89.
 LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 7.63599pt on input line 88.
+(Font)              scaled to size 7.63599pt on input line 89.
 LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 5.51999pt on input line 88.
+(Font)              scaled to size 5.51999pt on input line 89.
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 10.07397pt on input line 88.
+(Font)              scaled to size 10.07397pt on input line 89.
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 7.63599pt on input line 88.
+(Font)              scaled to size 7.63599pt on input line 89.
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 5.51999pt on input line 88.
+(Font)              scaled to size 5.51999pt on input line 89.
  [3]
-(./relatorio.bbl
+<trelica_entrada.png, id=18, 467.7475pt x 174.6525pt>
+File: trelica_entrada.png Graphic file (type png)
+
+<use trelica_entrada.png>
+Package pdftex.def Info: trelica_entrada.png used on input line 168.
+(pdftex.def)             Requested size: 467.74634pt x 174.65207pt.
+
+Overfull \hbox (49.49078pt too wide) in paragraph at lines 168--169
+ [][][] 
+ []
+
+<secao1.png, id=19, 160.6pt x 160.6pt>
+File: secao1.png Graphic file (type png)
+ <use secao1.png>
+Package pdftex.def Info: secao1.png used on input line 175.
+(pdftex.def)             Requested size: 160.5996pt x 160.5996pt.
+ (./relatorio.bbl
 
 Class scrartcl Warning: incompatible usage of \@ssect detected.
 (scrartcl)              You've used the KOMA-Script implementation of \@ssect
@@ -808,21 +854,31 @@ Class scrartcl Warning: incompatible usage of \@ssect detected.
 (scrartcl)              This could result in several error messages on input lin
 e 1.
 
+! Misplaced alignment tab character &.
+l.4 Steven Chapra &
+                 ~Raymond Canale.
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
 
-LaTeX Warning: Empty `thebibliography' environment or \BreakBibliography
-               before end of `thebibliography' environment on input line 3.
+[4]) [5<./trelica_entrada.png><./secao1.png>] (./relatorio.aux)
 
-) [4] (./relatorio.aux))
+LaTeX Warning: There were multiply-defined labels.
+
+)
 
 Here is how much of LuaTeX's memory you used:
- 8285 strings out of 495004
+ 9612 strings out of 495004
  100000,319454 words of node,token memory allocated
- 368 words of node memory still in use:
+ 384 words of node memory still in use:
    5 hlist, 2 vlist, 2 rule, 2 glue, 1 kern, 51 glue_spec, 1 write nodes
-   avail lists: 2:22,3:68,4:869,5:195,6:1752,7:29,9:193,10:201
- 11244 multiletter control sequences out of 65536+600000
- 124 fonts using 4879343 bytes
- 47i,10n,47p,382b,267s stack positions out of 5000i,500n,10000p,200000b,100000s
+   avail lists: 2:22,3:84,4:845,5:193,6:1881,7:29,9:212,10:228
+ 12533 multiletter control sequences out of 65536+600000
+ 126 fonts using 4957815 bytes
+ 47i,10n,47p,382b,326s stack positions out of 5000i,500n,10000p,200000b,100000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/share/texmf/fon
 ts/enc/dvips/cm-super/cm-super-t1.enc}<</usr/share/texlive/texmf-dist/fonts/type
 1/public/fourier/fourier-mex.pfb><</usr/share/texlive/texmf-dist/fonts/type1/pub
@@ -830,10 +886,10 @@ lic/fourier/fourier-mlit.pfb><</usr/share/texlive/texmf-dist/fonts/type1/public/
 fourier/fourier-ms.pfb><</usr/share/texlive/texmf-dist/fonts/type1/adobe/utopia/
 putr8a.pfb><</usr/share/texlive/texmf-dist/fonts/type1/adobe/utopia/putri8a.pfb>
 <</usr/share/texmf/fonts/type1/public/cm-super/sfsx1095.pfb>
-Output written on relatorio.pdf (4 pages, 62581 bytes).
+Output written on relatorio.pdf (5 pages, 94499 bytes).
 
-PDF statistics: 43 PDF objects out of 1000 (max. 8388607)
- 30 compressed objects within 1 object stream
+PDF statistics: 48 PDF objects out of 1000 (max. 8388607)
+ 32 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 131072)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
