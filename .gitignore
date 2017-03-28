@@ -1,0 +1,7 @@
+# python binaries
+__pycache__
+
+# Dias' files
+in.fem
+dias.out
+output.out

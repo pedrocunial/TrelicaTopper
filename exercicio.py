@@ -3,8 +3,10 @@
 """Exercise 07/02."""
 from math import sqrt
 from inverter import NumericMethods
+from parser import Parser
 
 import numpy as np
+import sys
 
 
 class bcolors:
@@ -20,46 +22,35 @@ class bcolors:
     UNDERLINE = '\033[4m'
 
 
-CORDS = [
-    [0, 0],
-    [0, 21],
-    [21, 0],
-    [21, 21]
-]
+try:
+    input_file = sys.argv[1]
+except IndexError:
+    input_file = 'arquivoentrada.fem'
 
-INCI = [
-    [1, 2],
-    [1, 3],
-    [3, 4],
-    [2, 4],
-    [2, 3],
-    [1, 4]
-]
+try:
+    out_file = sys.argv[2]
+except IndexError:
+    out_file = 'arquivoSaida.out'
 
-PROP = [
-    [1],
-    [1],
-    [1],
-    [1],
-    [sqrt(2)],
-    [sqrt(2)]
-]
+parser = Parser(input_file)
 
-METER = [
-    [float("21e5")],
-    [float("21e5")],
-    [float("21e5")],
-    [float("21e5")],
-    [float("21e5")],
-    [float("21e5")]
-]
+# Coordinates of the Nodes
+CORDS = parser.coords
 
-BC_NODES = [
-    [1, 1],
-    [1, 2],
-    [2, 1],
-    [2, 2]
-]
+# Incidences (AKA bars)
+INCI = parser.inci
+
+# Geometric Proportions
+PROP = parser.prop
+
+# Materials
+METER = parser.materials
+
+# Boundary Condition Nodes (AKA Nodes without a given degree of freedom)
+BC_NODES = parser.bcnodes
+
+# Loads
+P_g = parser.loads
 
 
 def calc_degree():
@@ -168,19 +159,6 @@ def calc_real_deal():
 
 
 real_deal = calc_real_deal()
-
-
-P_g = [
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    -1000
-]
-
 deleted_members = []
 
 
@@ -207,7 +185,7 @@ matrix = cut(real_deal)
 def calc_u():
     """Calculate U."""
     _m = np.asarray(matrix)
-    u, _, _ = NumericMethods.gauss_seidel(100, 0.005, _m, P_g)
+    u, _, _ = NumericMethods.gauss_seidel(1000, 0, _m, P_g)
     u2 = np.zeros(len(real_deal))
     i = 0
     j = 0
@@ -244,7 +222,6 @@ def calc_strain(_id):
 def calc_stress(_id):
     """Tensao."""
     return METER[_id][0] * calc_strain(_id)
-
 
 deleted_members_reaction = []
 Ur = U
@@ -309,11 +286,45 @@ for i in range(len(reacoes)):
 
 n_i = 1
 for i in range(len(U)):
-    print(str(bcolors.BOLD) + bcolors.OKBLUE +
-          "=====================================")
-    print(bcolors.HEADER + "Node {}".format(i // 2) + bcolors.ENDC)
+    if i % 2 == 0:
+        print(str(bcolors.BOLD) + bcolors.OKBLUE +
+              "=====================================")
+        print(bcolors.HEADER + "Node {}".format(i // 2) + bcolors.ENDC)
+
     print(bcolors.WARNING +
           "{}Displacement: {}{} in {}".format(bcolors.BOLD,
                                               bcolors.ENDC,
                                               U[i],
                                               "y" if i % 2 else "x"))
+
+FX = 'FX'
+FY = 'FY'
+
+with open(out_file, 'w') as fout:
+    fout.write('*DISPLACEMENTS\n')
+    for i in range(len(U) // 2):
+        fout.write('    {} {} {}\n'.format(
+            i + 1,
+            U[i * 2],
+            U[i * 2 + 1]
+        ))
+    fout.write('\n*ELEMENT_STRAINS\n')
+    for i in range(len(METER)):
+        fout.write('    {} {}\n'.format(
+            i + 1,
+            calc_strain(i)
+        ))
+    fout.write('\n*ELEMENT_STRESSES\n')
+    for i in range(len(METER)):
+        fout.write('    {} {}\n'.format(
+            i + 1,
+            calc_stress(i)
+        ))
+    fout.write('\n*REACTION_FORCES\n')
+    for i, reac in zip(range(len(reacoes)), reacoes):
+        if reac != 0:
+            fout.write('    {} {} = {}\n'.format(
+                i // 2 + 1,
+                FY if i % 2 else FX,
+                reac
+            ))
