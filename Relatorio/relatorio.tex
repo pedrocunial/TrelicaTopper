@@ -1,12 +1,13 @@
 %%% Preamble
 \documentclass[paper=a4, fontsize=11pt]{scrartcl}
+\usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{fourier}
 \usepackage[brazilian]{babel}							% Português
-\usepackage[protrusion=true,expansion=true]{microtype}	
+\usepackage[protrusion=true,expansion=true]{microtype}
 \usepackage{amsmath,amsfonts,amsthm} % Math packages
 \usepackage[pdftex]{graphicx}
-\usepackage{graphicx}	
+\usepackage{graphicx}
 \usepackage{url}
 \usepackage{indentfirst}
 \usepackage{mathtools}
@@ -26,7 +27,7 @@
 \usepackage{fancyhdr}
 \pagestyle{fancyplain}
 \fancyhead{}											% No page header
-\fancyfoot[L]{}											% Empty 
+\fancyfoot[L]{}											% Empty
 \fancyfoot[C]{}											% Empty
 \fancyfoot[R]{\thepage}									% Pagenumbering
 \renewcommand{\headrulewidth}{0pt}						% Remove header underlines
@@ -34,20 +35,20 @@
 \setlength{\headheight}{13.6pt}
 
 %%% Maketitle metadata
-\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} 		% Horizontal rule
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}}     % Horizontal rule
 
 \title{
-		%\vspace{-1in} 	
-		\usefont{OT1}{bch}{b}{n}
-		\normalfont \normalsize \textsc{Insper: Instituto de Ensino e Pesquisa} \\ [25pt] %Instituição
-		\horrule{0.5pt} \\[0.4cm]														  
-		\huge Implementação e análise de treliças planas \\			%Título do relatório
-		\horrule{2pt} \\[0.5cm]
+    %\vspace{-1in}
+    \usefont{OT1}{bch}{b}{n}
+    \normalfont \normalsize \textsc{Insper: Instituto de Ensino e Pesquisa} \\ [25pt] %Instituição
+    \horrule{0.5pt} \\[0.4cm]
+    \huge Implementação e análise de treliças planas \\			%Título do relatório
+    \horrule{2pt} \\[0.5cm]
 }
 \author{										%Autores
-		\normalfont 								\normalsize
+    \normalfont                 \normalsize
         Marcelo Andrade\\[-3pt]		\normalsize
-		Pedro Cunial\\[-3pt]		\normalsize
+    Pedro Cunial\\[-3pt]		\normalsize
         Gabriela Almeida\\[-3pt]		\normalsize
 }
 \date{\today}
@@ -58,7 +59,7 @@
 
 %%% Início document
 \begin{document}
-	
+
 %%% Capa do documento
 \maketitle
 
@@ -76,15 +77,15 @@
 Os objetivos do projeto são os seguintes:
 
 \begin{itemize}
-	\item Implementar um programa para análise de tração/compressão em
-	treliças planas. O código deverá ser escrito de modo que os dados de entrada
-	possam ser facilmente alterados a partir de um arquivo de texto. O programa deverá gerar um arquivo de saída.
-	
-	\item Aplicar técnicas numéricas e implementar um programa para
-	solução de sistemas de equações. 
-	
-	\item Analisar o arquivo de saída com o pós-processamento dos dados
-	disponibilizado. 
+  \item Implementar um programa para análise de tração/compressão em
+  treliças planas. O código deverá ser escrito de modo que os dados de entrada
+  possam ser facilmente alterados a partir de um arquivo de texto. O programa deverá gerar um arquivo de saída.
+
+  \item Aplicar técnicas numéricas e implementar um programa para
+  solução de sistemas de equações.
+
+  \item Analisar o arquivo de saída com o pós-processamento dos dados
+  disponibilizado.
 \end{itemize}
 
 %%% Introdução
@@ -92,7 +93,17 @@ Os objetivos do projeto são os seguintes:
 
 Com base nos conceitos desenvolvidos na disciplina de Transferência de Calor e Mecânica dos Sólidos sobre treliças plana, dever-se-ia desenvolver um projeto que cumpriria os objetivos listados na seção \ref{sec:objetivos}
 
-Na primeira parte do projeto, era preciso usar os modelos fornecidos de entrada e saída e implementar uma função capaz de executar os procedimentos discutidos em aula, para enfim, analisar a o valor de tração/compressão em treliças planas. Para desenvolver essa etapa do projeto, decidiu-se utilizar a linguagem Python para resolver os sistemas de equações.
+Na primeira parte do projeto, era preciso usar os modelos fornecidos de entrada
+e saída e implementar uma função capaz de executar os procedimentos discutidos
+em aula, para enfim, analisar a o valor de tração/compressão em treliças planas.
+Para desenvolver essa etapa do projeto, decidiu-se utilizar a linguagem Python
+(Python 3) junto à biblioteca numpy para manipulação otimizada de dados
+numéricos e estrutura de dados. Para não familiarizados com a lingugem, o grupo
+recomenda a instalação do Anaconda na versão com Python 3 para lidar não só com
+Python mas também com as dependências do projeto. O programa pode ser executado
+com o comando \texttt{python exercicio.py}, adicionalmente, o comando pode
+receber também o nome de um arquivo de entrada seguido do nome desejado do
+arquivo de saída, por exemplo: \texttt{python exercicio.py entrada.fen saida.out}.
 
 Em uma segunda parte, era necessário usar técnicas numéricas discutidas em aula, implementando um solucionador de sistemas de equações para resolver o sistema obtido na parte I do projeto. As técnicas numéricas discutidas em aula foram a de Gauss-Seidel e a de Jacobi. Após implementar ambas as técnicas e comparar os resultados obtidos por cada uma delas, decidiu-se usar a Gauss-Seidel, pois ela apresentou os valores de saída mais condizentes com o projeto.
 
@@ -102,7 +113,7 @@ Em uma segunda parte, era necessário usar técnicas numéricas discutidas em au
 A partir do arquivo de entrada do programa, primeiramente calcula-se os graus de liberdade de cada um dos elementos a partir da matriz de incidências do arquivo de entrada. Sendo \(N\) os graus de liberdade de um elemento \(x\), e \(I\) a matriz de incidências:
 
 
-\[N_x = 
+\[N_x =
 \begin{bmatrix}
 I_{x1} - 1 ,& I_{x1} ,& I_{x2} - 1 ,& I_{x2}  \\
 \end{bmatrix}
@@ -127,8 +138,8 @@ cs & s^2 & -cs & -s^2 \\
 \end{bmatrix}
 \]
 
-Já com a matriz de rigidez no sistema global de cada elemento, calculou-se a matriz de rigidez global da treliça, representada por \(K_g\). Para esse cálculo, primeiro tem-se que determinar as matrizes de superposição para cada elemento, a soma dessas matrizes resulta na rigidez global da treliça. 
-	
+Já com a matriz de rigidez no sistema global de cada elemento, calculou-se a matriz de rigidez global da treliça, representada por \(K_g\). Para esse cálculo, primeiro tem-se que determinar as matrizes de superposição para cada elemento, a soma dessas matrizes resulta na rigidez global da treliça.
+
 As matrizes de superposição são obtidas através substituição dos índices da matriz \(K_e\) pelos seus respectivos graus de liberdade.
 
 A partir da matriz \(K_g\), utilizando o vetor de forças globais e os graus de liberdade dos nós, aplica-se as condições de contorno na matriz \(K_g\).
@@ -145,7 +156,7 @@ Com o vetor de deslocamento calculado e utilizando a matriz \(K_g\) anterior as 
 
 Por fim, calculou-se a tensão e deformação de cada um dos elementos, a tensão representado por \(\sigma\) e a deformação representada por \(\epsilon\).
 
-\[\sigma = \frac{E}{l}  
+\[\sigma = \frac{E}{l}
 \begin{bmatrix}
 -c & -s & c & s\\
 \end{bmatrix}
@@ -158,7 +169,7 @@ v_2 \\
 \]
 
 
-\[\epsilon = \frac{1}{l}  
+\[\epsilon = \frac{1}{l}
 \begin{bmatrix}
 -c & -s & c & s\\
 \end{bmatrix}
@@ -170,7 +181,7 @@ v_2 \\
 \end{bmatrix}
 \]
 
-Com todos os valores das reações de apoio, tensões e deformações dos elementos, e deslocamentos dos nós, formatou-se-os em um arquivo de saída, como pode ser visto no apêndice \ref{appendix:saida}. 
+Com todos os valores das reações de apoio, tensões e deformações dos elementos, e deslocamentos dos nós, formatou-se-os em um arquivo de saída, como pode ser visto no apêndice \ref{appendix:saida}.
 
 %%% Resultados e Discussão
 \section{Resultados e Discussão}
@@ -178,24 +189,24 @@ Com todos os valores das reações de apoio, tensões e deformações dos elemen
 A partir da treliça de entrada representada pela figura \ref{fig:trelica_entrada}, construiu-se o arquivo de entrada do programa, como visto do apêndice \ref{appendix:entrada}.
 
 \begin{figure}[H]
-	\includegraphics[width=\textwidth]{trelica_entrada.png}
-	\caption{Representação da treliça de entrada do programa}
-	\label{fig:trelica_entrada}
+  \includegraphics[width=\textwidth]{trelica_entrada.png}
+  \caption{Representação da treliça de entrada do programa}
+  \label{fig:trelica_entrada}
 \end{figure}
 
 \begin{figure}[H]
-	\includegraphics[center]{secao1.png}
-	\caption{Representação da seção transversal da treliça de entrada}
-	\label{fig:secao14}
+  \includegraphics[center]{secao1.png}
+  \caption{Representação da seção transversal da treliça de entrada}
+  \label{fig:secao14}
 \end{figure}
 
 
 Para validar os resultados obtidos, montou-se a mesma treliça do arquivo de entrada no programa Ftool com intuito de se comparar os valores das reações de apoio.
 
 \begin{figure}[H]
-	\includegraphics[width=\textwidth]{ftool.png}
-	\caption{Implementação da entrada do programa no Ftool}
-	\label{fig:ftool}
+  \includegraphics[width=\textwidth]{ftool.png}
+  \caption{Implementação da entrada do programa no Ftool}
+  \label{fig:ftool}
 \end{figure}
 
 Como pode ser observado na figura \ref{fig:ftool}, os valores encontrados a partir do Ftool condizem com os valores computados pelo programa feito pelo grupo. Há uma pequena diferença entre os resultados, que pode ser principalmente associada à utilização do método numérico de Gauss-Seidel para a resolução dos sistemas lineares. O método usado pelo Ftool não é o mesmo usado pelo programa, causando uma diferença no resultado final.
@@ -211,150 +222,150 @@ Além disso, o conhecimento de métodos numéricos para manipulação de dados �
 \bibliographystyle{plain}
 
 \begin{appendices}
-	\section{Arquivo Saída} \label{appendix:saida}
-	
-		\begin{lstlisting}
-	*DISPLACEMENTS
-		1 0.0 0.0
-		2 1.577956428087981e-06 -6.041091190959638e-06
-		3 -2.8571428571428564e-06 0.0
-		4 2.3997541478958825e-22 -1.9019583569978225e-05
-		5 0.0 -1.9019583569978225e-05
-		6 -1.5779564280879803e-06 -6.041091190959638e-06
-		7 2.8571428571428564e-06 0.0
-		8 0.0 0.0
-	
-	*ELEMENT_STRAINS
-		1 -1.1157836907179139e-06
-		2 -1.4285714285714282e-06
-		3 -3.020545595479819e-06
-		4 -7.889782140439904e-07
-		5 1.4285714285714282e-06
-		6 0.0
-		7 -4.040610178208841e-06
-		8 -7.889782140439903e-07
-		9 1.4285714285714282e-06
-		10 -4.040610178208841e-06
-		11 -3.020545595479819e-06
-		12 -1.115783690717914e-06
-		13 -1.4285714285714282e-06
-	
-	*ELEMENT_STRESSES
-		1 -234314.57505076192
-		2 -299999.99999999994
-		3 -634314.5750507619
-		4 -165685.424949238
-		5 299999.99999999994
-		6 0.0
-		7 -848528.1374238566
-		8 -165685.42494923796
-		9 299999.99999999994
-		10 -848528.1374238566
-		11 -634314.5750507619
-		12 -234314.57505076195
-		13 -299999.99999999994
-	
-	*REACTION_FORCES
-		1 FX = 9313.708498984757
-		1 FY = 3313.708498984759
-		3 FY = 24686.291501015236
-		7 FY = 24686.291501015236
-		8 FX = -9313.708498984757
-		8 FY = 3313.70849898476
-	\end{lstlisting} 
-	
-		\section{Arquivo Entrada} \label{appendix:entrada}
-		
-		\begin{lstlisting}
-	*COORDINATES
-	8
-	1 0 0
-	2 2 2
-	3 2 0
-	4 4 2
-	5 4 0
-	6 6 2
-	7 6 0
-	8 8 0
-	
-	*ELEMENT_GROUPS
-	13
-	1 1 BAR
-	2 1 BAR
-	3 1 BAR
-	4 1 BAR
-	5 1 BAR
-	6 1 BAR
-	7 1 BAR
-	8 1 BAR
-	9 1 BAR
-	10 1 BAR
-	11 1 BAR
-	12 1 BAR
-	13 1 BAR
-	
-	*INCIDENCES
-	1 1 2
-	2 1 3
-	3 2 3
-	4 2 4
-	5 3 5
-	6 4 5
-	7 3 4
-	8 4 6
-	9 5 7
-	10 4 7
-	11 6 7
-	12 6 8
-	13 7 8
-	
-	*MATERIALS
-	13
-	210E9 1570E6 1570E6
-	210E9 1570E6 1570E6
-	210E9 1570E6 1570E6
-	210E9 1570E6 1570E6
-	210E9 1570E6 1570E6
-	210E9 1570E6 1570E6
-	210E9 1570E6 1570E6
-	210E9 1570E6 1570E6
-	210E9 1570E6 1570E6
-	210E9 1570E6 1570E6
-	210E9 1570E6 1570E6
-	210E9 1570E6 1570E6
-	210E9 1570E6 1570E6
-	
-	*GEOMETRIC_PROPERTIES
-	13
-	2E-2
-	2E-2
-	2E-2
-	2E-2
-	2E-2
-	2E-2
-	2E-2
-	2E-2
-	2E-2
-	2E-2
-	2E-2
-	2E-2
-	2E-2
-	
-	*BCNODES
-	6
-	1 1
-	1 2
-	3 2
-	7 2
-	8 1
-	8 2
-	
-	*LOADS
-	3
-	2 2 -16E3
-	4 2 -24E3
-	6 2 -16E3
-		\end{lstlisting} 
+  \section{Arquivo Saída} \label{appendix:saida}
+
+    \begin{lstlisting}
+  *DISPLACEMENTS
+    1 0.0 0.0
+    2 1.577956428087981e-06 -6.041091190959638e-06
+    3 -2.8571428571428564e-06 0.0
+    4 2.3997541478958825e-22 -1.9019583569978225e-05
+    5 0.0 -1.9019583569978225e-05
+    6 -1.5779564280879803e-06 -6.041091190959638e-06
+    7 2.8571428571428564e-06 0.0
+    8 0.0 0.0
+
+  *ELEMENT_STRAINS
+    1 -1.1157836907179139e-06
+    2 -1.4285714285714282e-06
+    3 -3.020545595479819e-06
+    4 -7.889782140439904e-07
+    5 1.4285714285714282e-06
+    6 0.0
+    7 -4.040610178208841e-06
+    8 -7.889782140439903e-07
+    9 1.4285714285714282e-06
+    10 -4.040610178208841e-06
+    11 -3.020545595479819e-06
+    12 -1.115783690717914e-06
+    13 -1.4285714285714282e-06
+
+  *ELEMENT_STRESSES
+    1 -234314.57505076192
+    2 -299999.99999999994
+    3 -634314.5750507619
+    4 -165685.424949238
+    5 299999.99999999994
+    6 0.0
+    7 -848528.1374238566
+    8 -165685.42494923796
+    9 299999.99999999994
+    10 -848528.1374238566
+    11 -634314.5750507619
+    12 -234314.57505076195
+    13 -299999.99999999994
+
+  *REACTION_FORCES
+    1 FX = 9313.708498984757
+    1 FY = 3313.708498984759
+    3 FY = 24686.291501015236
+    7 FY = 24686.291501015236
+    8 FX = -9313.708498984757
+    8 FY = 3313.70849898476
+  \end{lstlisting}
+
+    \section{Arquivo Entrada} \label{appendix:entrada}
+
+    \begin{lstlisting}
+  *COORDINATES
+  8
+  1 0 0
+  2 2 2
+  3 2 0
+  4 4 2
+  5 4 0
+  6 6 2
+  7 6 0
+  8 8 0
+
+  *ELEMENT_GROUPS
+  13
+  1 1 BAR
+  2 1 BAR
+  3 1 BAR
+  4 1 BAR
+  5 1 BAR
+  6 1 BAR
+  7 1 BAR
+  8 1 BAR
+  9 1 BAR
+  10 1 BAR
+  11 1 BAR
+  12 1 BAR
+  13 1 BAR
+
+  *INCIDENCES
+  1 1 2
+  2 1 3
+  3 2 3
+  4 2 4
+  5 3 5
+  6 4 5
+  7 3 4
+  8 4 6
+  9 5 7
+  10 4 7
+  11 6 7
+  12 6 8
+  13 7 8
+
+  *MATERIALS
+  13
+  210E9 1570E6 1570E6
+  210E9 1570E6 1570E6
+  210E9 1570E6 1570E6
+  210E9 1570E6 1570E6
+  210E9 1570E6 1570E6
+  210E9 1570E6 1570E6
+  210E9 1570E6 1570E6
+  210E9 1570E6 1570E6
+  210E9 1570E6 1570E6
+  210E9 1570E6 1570E6
+  210E9 1570E6 1570E6
+  210E9 1570E6 1570E6
+  210E9 1570E6 1570E6
+
+  *GEOMETRIC_PROPERTIES
+  13
+  2E-2
+  2E-2
+  2E-2
+  2E-2
+  2E-2
+  2E-2
+  2E-2
+  2E-2
+  2E-2
+  2E-2
+  2E-2
+  2E-2
+  2E-2
+
+  *BCNODES
+  6
+  1 1
+  1 2
+  3 2
+  7 2
+  8 1
+  8 2
+
+  *LOADS
+  3
+  2 2 -16E3
+  4 2 -24E3
+  6 2 -16E3
+    \end{lstlisting}
 \end{appendices}
 
 %%% Fim do Documento
