@@ -7,7 +7,7 @@ Warning--empty publisher in gauss_seidel
 Warning--empty year in gauss_seidel
 You've used 1 entry,
             2118 wiz_defined-function locations,
-            500 strings with 4075 characters,
+            500 strings with 4058 characters,
 and the built_in function-call counts, 232 in all, are:
 = -- 16
 > -- 7

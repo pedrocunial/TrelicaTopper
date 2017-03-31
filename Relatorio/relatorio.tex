@@ -11,6 +11,7 @@
 \usepackage{indentfirst}
 \usepackage{mathtools}
 \usepackage{listings}
+\usepackage[titletoc]{appendix}
 \DeclarePairedDelimiter{\Vector}{\lparen}{\rparen}
 
 %%% Custom sectioning
@@ -65,7 +66,7 @@
 %%% Início Relatorio
 
 %%% Objetivos
-\section{Objetivos}
+\section{Objetivos} \label{sec:objetivos}
 Os objetivos do projeto são os seguintes:
 
 \begin{itemize}
@@ -82,6 +83,12 @@ Os objetivos do projeto são os seguintes:
 
 %%% Introdução
 \section{Introdução}
+
+Com base nos conceitos desenvolvidos na disciplina de Transferência de Calor e Mecânica dos Sólidos sobre treliças plana, dever-se-ia desenvolver um projeto que cumpriria os objetivos listados na seção \ref{sec:objetivos}
+
+Na primeira parte do projeto, era preciso usar os modelos fornecidos de entrada e saída e implementar uma função capaz de executar os procedimentos discutidos em aula, para enfim, analisar a o valor de tração/compressão em treliças planas. Para desenvolver essa etapa do projeto, decidiu-se utilizar a linguagem Python para resolver os sistemas de equações.
+
+Em uma segunda parte, era necessário usar técnicas numéricas discutidas em aula, implementando um solucionador de sistemas de equações para resolver o sistema obtido na parte I do projeto. As técnicas numéricas discutidas em aula foram a de Gauss-Seidel e a de Jacobi. Após implementar ambas as técnicas e comparar os resultados obtidos por cada uma delas, decidiu-se usar a Gauss-Seidel, pois ela apresentou os valores de saída mais condizentes com o projeto.
 
 %%% Metodologia
 \section{Metodologia}
@@ -157,36 +164,73 @@ v_2 \\
 \end{bmatrix}
 \]
 
-Com todos os valores das reações de apoio, tensões e deformações dos elementos, e deslocamentos dos nós, exportou-se todos os dados em um arquivo de saída.
+Com todos os valores das reações de apoio, tensões e deformações dos elementos, e deslocamentos dos nós, exportou-se todos os dados em um arquivo de saída, como pode ser visto no apêndice \ref{appendix:saida}.
 
 %%% Resultados e Discussão
 \section{Resultados e Discussão}
 
 
-\begin{figure}[!htb]
-	\centering
-	\includegraphics{trelica_entrada.png}
-	\caption{Figura representativa da entrada do programa}
-	\label{Rotulo}
-\end{figure}
-
-\begin{figure}[!htb]
-	\centering
-	\includegraphics{secao1.png}
-	\caption{Seção usada na entrada}
-	\label{Rotulo}
-\end{figure}
 
 
 %%% Conclusões
 \section{Conclusões}
 
-%%% Agradecimentos
-\section{Agradecimentos} 
-
-
 \bibliography{referencias}{}
 \bibliographystyle{plain}
+
+\begin{appendices}
+	\section{Arquivo Saída} \label{appendix:saida}
+	
+		\begin{lstlisting}
+		*DISPLACEMENTS
+			1 0.0 0.0
+			2 1.577956428087981e-06 -6.041091190959638e-06
+			3 -2.8571428571428564e-06 0.0
+			4 2.3997541478958825e-22 -1.9019583569978225e-05
+			5 0.0 -1.9019583569978225e-05
+			6 -1.5779564280879803e-06 -6.041091190959638e-06
+			7 2.8571428571428564e-06 0.0
+			8 0.0 0.0
+		
+		*ELEMENT_STRAINS
+			1 -1.1157836907179139e-06
+			2 -1.4285714285714282e-06
+			3 -3.020545595479819e-06
+			4 -7.889782140439904e-07
+			5 1.4285714285714282e-06
+			6 0.0
+			7 -4.040610178208841e-06
+			8 -7.889782140439903e-07
+			9 1.4285714285714282e-06
+			10 -4.040610178208841e-06
+			11 -3.020545595479819e-06
+			12 -1.115783690717914e-06
+			13 -1.4285714285714282e-06
+		
+		*ELEMENT_STRESSES
+			1 -234314.57505076192
+			2 -299999.99999999994
+			3 -634314.5750507619
+			4 -165685.424949238
+			5 299999.99999999994
+			6 0.0
+			7 -848528.1374238566
+			8 -165685.42494923796
+			9 299999.99999999994
+			10 -848528.1374238566
+			11 -634314.5750507619
+			12 -234314.57505076195
+			13 -299999.99999999994
+		
+		*REACTION_FORCES
+			1 FX = 9313.708498984757
+			1 FY = 3313.708498984759
+			3 FY = 24686.291501015236
+			7 FY = 24686.291501015236
+			8 FX = -9313.708498984757
+			8 FY = 3313.70849898476
+	\end{lstlisting} 
+\end{appendices}
 
 %%% Fim do Documento
 \end{document}
