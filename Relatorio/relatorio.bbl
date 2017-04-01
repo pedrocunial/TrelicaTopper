@@ -1,3 +1,7 @@
-\begin{thebibliography}{}
+\begin{thebibliography}{1}
+
+\bibitem{gauss_seidel}
+Steven Chapra.
+\newblock {\em Numerical Methods for Engeneers}.
 
 \end{thebibliography}
